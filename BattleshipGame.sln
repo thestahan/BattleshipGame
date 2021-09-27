@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "BattleshipGame\API.csproj", "{E3B68283-8F25-446F-B6F7-CAD25C43C165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{D1A6C8A9-B611-4B86-B827-8FC94D06FBA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{C81DFB8D-2E23-4B76-93C9-7CF6CEAE6486}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3B68283-8F25-446F-B6F7-CAD25C43C165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B68283-8F25-446F-B6F7-CAD25C43C165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B68283-8F25-446F-B6F7-CAD25C43C165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B68283-8F25-446F-B6F7-CAD25C43C165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1A6C8A9-B611-4B86-B827-8FC94D06FBA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1A6C8A9-B611-4B86-B827-8FC94D06FBA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1A6C8A9-B611-4B86-B827-8FC94D06FBA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1A6C8A9-B611-4B86-B827-8FC94D06FBA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C81DFB8D-2E23-4B76-93C9-7CF6CEAE6486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C81DFB8D-2E23-4B76-93C9-7CF6CEAE6486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C81DFB8D-2E23-4B76-93C9-7CF6CEAE6486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C81DFB8D-2E23-4B76-93C9-7CF6CEAE6486}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44C3E41F-78B9-451C-9690-25DA95C7BE1F}
+	EndGlobalSection
+EndGlobal
