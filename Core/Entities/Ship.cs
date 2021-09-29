@@ -6,7 +6,7 @@ namespace Core.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IReadOnlyList<string> CellsPositions { get; set; }
+        public List<string> CellsPositions { get; set; }
         public int Size { get; set; }
     }
 }
