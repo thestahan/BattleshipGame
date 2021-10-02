@@ -60,9 +60,9 @@ namespace Core.Interfaces
 
                         directions = directions.Where(x => x != currentDirection).ToList();
 
-                        if (GameInitValidator.PointsInDirectionExceedMap(shipSize, currentDirection, point)) continue;
+                        if (GameValidator.PointsInDirectionExceedMap(shipSize, currentDirection, point)) continue;
 
-                        if (GameInitValidator.PointsInDirectionOverlapShip(shipSize, currentDirection, point, ships)) continue;
+                        if (GameValidator.PointsInDirectionOverlapShip(shipSize, currentDirection, point, ships)) continue;
 
                         coords = GetShipCoords(shipSize, currentDirection, point);
 

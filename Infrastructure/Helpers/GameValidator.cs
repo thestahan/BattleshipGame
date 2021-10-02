@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Infrastructure.Helpers
 {
-    public class GameInitValidator
+    public class GameValidator
     {
         public static bool NumberExceededsRange(int number) =>
             number < Game.MinNumber ||
@@ -70,20 +70,20 @@ namespace Infrastructure.Helpers
             if (direction == Direction.TOP)
             {
                 char letterToCheck = (char)(startingPoint.Letter - shipSize);
-                return GameInitValidator.LetterExceededsRange(letterToCheck);
+                return GameValidator.LetterExceededsRange(letterToCheck);
             }
             else if (direction == Direction.LEFT)
             {
-                return GameInitValidator.NumberExceededsRange(startingPoint.Number - shipSize);
+                return GameValidator.NumberExceededsRange(startingPoint.Number - shipSize);
             }
             else if (direction == Direction.BOTTOM)
             {
                 char letterToCheck = (char)(startingPoint.Letter + shipSize);
-                return GameInitValidator.LetterExceededsRange(letterToCheck);
+                return GameValidator.LetterExceededsRange(letterToCheck);
             }
             else if (direction == Direction.RIGHT)
             {
-                return GameInitValidator.NumberExceededsRange(startingPoint.Number + shipSize);
+                return GameValidator.NumberExceededsRange(startingPoint.Number + shipSize);
             }
 
             return true;
