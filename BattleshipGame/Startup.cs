@@ -28,6 +28,8 @@ namespace BattleshipGame
 
             services.AddScoped<IGameService, GameService>();
 
+            services.AddScoped<IGameRepository, GameRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BattleshipGame", Version = "v1" });
