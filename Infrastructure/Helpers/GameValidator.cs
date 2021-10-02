@@ -88,5 +88,17 @@ namespace Infrastructure.Helpers
 
             return true;
         }
+
+        public static bool ShotIsUnique(Game game, string position) 
+        {
+            bool playerOneMakingMove = game.NextTurnPlayerId == game.PlayerOne.Id;
+
+            if (playerOneMakingMove)
+            {
+                return game.PlayerOne.EnemyBoard.Shots.Any(x => x.Position == position);
+            }
+
+            return game.PlayerTwo.EnemyBoard.Shots.Any(x => x.Position == position);
+        }
     }
 }
