@@ -1,7 +1,13 @@
-﻿namespace Core.Entities
+﻿using System;
+
+namespace Core.Entities
 {
     public class Game
     {
+        public Game()
+        {
+        }
+
         public Game(string playerOneName, string playerTwoName)
         {
             PlayerOne = new Player
@@ -15,9 +21,11 @@
             };
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Player PlayerOne { get; set; }
         public Player PlayerTwo { get; set; }
+        public bool Finished { get; set; }
+        public Guid NextTurnPlayerId { get; set; }
         public static char MinLetter { get; } = 'A';
         public static char MaxLetter { get; } = 'J';
         public static int MinNumber { get; } = 1;
