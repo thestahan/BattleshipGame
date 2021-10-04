@@ -10,6 +10,7 @@ namespace Core.Entities
         public string Name { get; set; }
         public List<string> CellsPositions { get; set; }
         public int Size { get; set; }
+        public int RemainingHealth { get; set; }
 
         public Ship Clone()
         {
@@ -17,7 +18,8 @@ namespace Core.Entities
             {
                 Name = Name,
                 CellsPositions = CellsPositions,
-                Size = Size
+                Size = Size,
+                RemainingHealth = RemainingHealth
             };
         }
     }

@@ -98,6 +98,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RemainingHealth")
+                        .HasColumnType("int");
+
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
