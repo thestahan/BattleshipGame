@@ -81,5 +81,14 @@ namespace Infrastructure.Data
 
             await _context.SaveChangesAsync(cancellationToken);
         }
+
+        public async Task UpdateGameNextPlayer(Game game, CancellationToken cancellationToken)
+        {
+            _context.Games.Attach(game);
+
+            _context.Entry(game).Property(x => x.NextTurnPlayerId).IsModified = true;
+
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

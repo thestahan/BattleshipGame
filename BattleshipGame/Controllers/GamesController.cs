@@ -67,11 +67,19 @@ namespace API.Controllers
             {
                 await _gameRepo.UpdateBoardAsync(game.PlayerOne.EnemyBoard, cancellationToken);
                 await _gameRepo.UpdateBoardAsync(game.PlayerTwo.SelfBoard, cancellationToken);
+
+                game.NextTurnPlayerId = game.PlayerTwo.Id;
+
+                await _gameRepo.UpdateGameNextPlayer(game, cancellationToken);
             }
             else
             {
                 await _gameRepo.UpdateBoardAsync(game.PlayerTwo.EnemyBoard, cancellationToken);
                 await _gameRepo.UpdateBoardAsync(game.PlayerOne.SelfBoard, cancellationToken);
+
+                game.NextTurnPlayerId = game.PlayerOne.Id;
+
+                await _gameRepo.UpdateGameNextPlayer(game, cancellationToken);
             }
 
             return Ok(new ShotReturnDto
@@ -79,7 +87,8 @@ namespace API.Controllers
                 Hit = shot.ShipWasHit,
                 Position = shot.Position,
                 Sank = playerOneMakingMove ? _shotService.ShipGotSank(game.PlayerOne.EnemyBoard, position) : 
-                                             _shotService.ShipGotSank(game.PlayerTwo.EnemyBoard, position)
+                                             _shotService.ShipGotSank(game.PlayerTwo.EnemyBoard, position),
+                NextPlayerId = game.NextTurnPlayerId
             });
         }
     }
