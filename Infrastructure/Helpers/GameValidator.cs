@@ -95,10 +95,10 @@ namespace Infrastructure.Helpers
 
             if (playerOneMakingMove)
             {
-                return game.PlayerOne.EnemyBoard.Shots.Any(x => x.Position == position);
+                return !game.PlayerOne.EnemyBoard.Shots.Any(x => x.Position == position);
             }
 
-            return game.PlayerTwo.EnemyBoard.Shots.Any(x => x.Position == position);
+            return !game.PlayerTwo.EnemyBoard.Shots.Any(x => x.Position == position);
         }
     }
 }

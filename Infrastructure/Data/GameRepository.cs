@@ -36,6 +36,8 @@ namespace Infrastructure.Data
         public async Task<Game> GetGameByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _context.Games.Where(x => x.Id == id)
+                .Include(x => x.PlayerOne)
+                .Include(x => x.PlayerTwo)
                 .FirstOrDefaultAsync(cancellationToken);
         }
     }

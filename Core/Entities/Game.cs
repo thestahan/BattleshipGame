@@ -19,13 +19,16 @@ namespace Core.Entities
             {
                 Name = playerTwoName
             };
+
+            NextTurnPlayer = PlayerOne;
         }
 
         public Guid Id { get; set; }
         public Player PlayerOne { get; set; }
         public Player PlayerTwo { get; set; }
-        public bool Finished { get; set; }
+        public Player NextTurnPlayer { get; set; }
         public Guid NextTurnPlayerId { get; set; }
+        public bool Finished { get; set; }
         public static char MinLetter { get; } = 'A';
         public static char MaxLetter { get; } = 'J';
         public static int MinNumber { get; } = 1;
