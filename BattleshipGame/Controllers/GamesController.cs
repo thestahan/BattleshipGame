@@ -12,11 +12,13 @@ namespace API.Controllers
     public class GamesController : Controller
     {
         private readonly IGameService _gameService;
+        private readonly IShotService _shotService;
         private readonly IGameRepository _gameRepo;
 
-        public GamesController(IGameService gameService, IGameRepository gameRepo)
+        public GamesController(IGameService gameService, IShotService shotService, IGameRepository gameRepo)
         {
             _gameService = gameService;
+            _shotService = shotService;
             _gameRepo = gameRepo;
         }
 
@@ -57,7 +59,7 @@ namespace API.Controllers
 
             string position = $"{dto.PositionRow}{dto.PositionColumn}";
 
-            var shot = _gameService.MakeShot(game, position);
+            var shot = _shotService.MakeShot(game, position);
 
             bool playerOneMakingMove = game.NextTurnPlayerId == game.PlayerOne.Id;
 
@@ -75,7 +77,9 @@ namespace API.Controllers
             return Ok(new ShotReturnDto
             {
                 Hit = shot.ShipWasHit,
-                Position = shot.Position
+                Position = shot.Position,
+                Sank = playerOneMakingMove ? _shotService.ShipGotSank(game.PlayerOne.EnemyBoard, position) : 
+                                             _shotService.ShipGotSank(game.PlayerTwo.EnemyBoard, position)
             });
         }
     }

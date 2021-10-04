@@ -1,5 +1,6 @@
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@ namespace BattleshipGame
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IGameService, GameService>();
+
+            services.AddScoped<IShotService, ShotService>();
 
             services.AddScoped<IGameRepository, GameRepository>();
 

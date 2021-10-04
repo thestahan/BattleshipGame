@@ -16,40 +16,6 @@ namespace Core.Interfaces
             return game;
         }
 
-        public Shot MakeShot(Game game, string position)
-        {
-            bool playerOneMakingMove = game.NextTurnPlayerId == game.PlayerOne.Id;
-
-            if (playerOneMakingMove)
-            {
-                var playerOneShot = new Shot
-                {
-                    Position = position,
-                    ShipWasHit = game.PlayerOne.EnemyBoard.Ships.Any(x => x.CellsPositions.Contains(position)),
-                    ShotByPlayer = game.PlayerOne
-                };
-
-                game.PlayerOne.EnemyBoard.Shots.Add(playerOneShot);
-
-                game.PlayerTwo.SelfBoard.Shots.Add(playerOneShot.Clone());
-
-                return playerOneShot;
-            }
-
-            var playerTwoShot = new Shot
-            {
-                Position = position,
-                ShipWasHit = game.PlayerTwo.EnemyBoard.Ships.Any(x => x.CellsPositions.Contains(position)),
-                ShotByPlayer = game.PlayerOne
-            };
-
-            game.PlayerOne.SelfBoard.Shots.Add(playerTwoShot);
-
-            game.PlayerTwo.EnemyBoard.Shots.Add(playerTwoShot.Clone());
-
-            return playerTwoShot;
-        }
-
         private Game SetInitialShips(Game game)
         {
             var playerOneSelfBoardShips = GenerateRandomlyPlacedShips();
@@ -107,7 +73,8 @@ namespace Core.Interfaces
                         {
                             CellsPositions = coords,
                             Name = "",
-                            Size = shipSize
+                            Size = shipSize,
+                            RemainingHealth = shipSize
                         });
 
                         shipCoordsSelected = true;
