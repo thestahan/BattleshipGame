@@ -47,6 +47,8 @@ namespace API.Controllers
 
             var game = await _gameRepo.GetGameByIdAsync(dto.GameId, cancellationToken);
 
+            if (game == null) return NotFound();
+
             if (game.Finished) return BadRequest("Given game has already been finished");
 
             bool correctPlayerMakingMove = game.NextTurnPlayerId == dto.PlayerId;
@@ -82,13 +84,23 @@ namespace API.Controllers
                 await _gameRepo.UpdateGameNextPlayer(game, cancellationToken);
             }
 
+            bool sank = playerOneMakingMove ? _shotService.ShipGotSank(game.PlayerOne.EnemyBoard, position) :
+                                              _shotService.ShipGotSank(game.PlayerTwo.EnemyBoard, position);
+
+            bool gameFinished = sank && _gameService.GameHasFinished(game, playerOneMakingMove);
+
+            if (gameFinished)
+            {
+                await _gameRepo.FinishGame(game, cancellationToken);
+            }
+
             return Ok(new ShotReturnDto
             {
                 Hit = shot.ShipWasHit,
                 Position = shot.Position,
-                Sank = playerOneMakingMove ? _shotService.ShipGotSank(game.PlayerOne.EnemyBoard, position) : 
-                                             _shotService.ShipGotSank(game.PlayerTwo.EnemyBoard, position),
-                NextPlayerId = game.NextTurnPlayerId
+                Sank = sank,
+                NextPlayerId = game.NextTurnPlayerId,
+                GameFinished = gameFinished
             });
         }
     }

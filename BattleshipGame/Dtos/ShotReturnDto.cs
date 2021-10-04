@@ -8,5 +8,6 @@ namespace API.Dtos
         public bool Hit { get; set; }
         public bool Sank { get; set; }
         public Guid NextPlayerId { get; set; }
+        public bool GameFinished { get; set; }
     }
 }

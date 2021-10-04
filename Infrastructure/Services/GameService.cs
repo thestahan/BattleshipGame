@@ -16,6 +16,16 @@ namespace Core.Interfaces
             return game;
         }
 
+        public bool GameHasFinished(Game game, bool playerOneMakingMove)
+        {
+            if (playerOneMakingMove)
+            {
+                return game.PlayerOne.EnemyBoard.Ships.All(x => x.RemainingHealth == 0);
+            }
+
+            return game.PlayerTwo.EnemyBoard.Ships.All(x => x.RemainingHealth == 0);
+        }
+
         private Game SetInitialShips(Game game)
         {
             var playerOneSelfBoardShips = GenerateRandomlyPlacedShips();

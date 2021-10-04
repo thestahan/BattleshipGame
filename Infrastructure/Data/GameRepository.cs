@@ -49,6 +49,17 @@ namespace Infrastructure.Data
             }
         }
 
+        public async Task FinishGame(Game game, CancellationToken cancellationToken)
+        {
+            _context.Games.Attach(game);
+
+            _context.Entry(game).Property(x => x.Finished).IsModified = true;
+
+            game.Finished = true;
+
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
         public async Task<Game> GetGameByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _context.Games.Where(x => x.Id == id)
@@ -60,18 +71,6 @@ namespace Infrastructure.Data
                 .Include("PlayerTwo.SelfBoard.Shots")
                 .Include("PlayerTwo.EnemyBoard.Ships")
                 .Include("PlayerTwo.EnemyBoard.Shots")
-                //.Include(x => x.PlayerOne)
-                //    .ThenInclude(x => x.SelfBoard)
-                //        .ThenInclude(x => x.Ships)
-                //.Include(x => x.PlayerOne)
-                //    .ThenInclude(x => x.SelfBoard)
-                //        .ThenInclude(x => x.Shots)
-                //.Include(x => x.PlayerOne)
-                //    .ThenInclude(x => x.EnemyBoard)
-                //.Include(x => x.PlayerTwo)
-                //    .ThenInclude(x => x.SelfBoard)
-                //.Include(x => x.PlayerTwo)
-                //    .ThenInclude(x => x.EnemyBoard)
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
