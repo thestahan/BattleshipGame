@@ -55,7 +55,28 @@ namespace API.Controllers
 
             if (!shotIsUnique) return BadRequest("Given postiotion has already been shot");
 
-            return Ok("Shoot is valid");
+            string position = $"{dto.PositionRow}{dto.PositionColumn}";
+
+            var shot = _gameService.MakeShot(game, position);
+
+            bool playerOneMakingMove = game.NextTurnPlayerId == game.PlayerOne.Id;
+
+            if (playerOneMakingMove)
+            {
+                await _gameRepo.UpdateBoardAsync(game.PlayerOne.EnemyBoard, cancellationToken);
+                await _gameRepo.UpdateBoardAsync(game.PlayerTwo.SelfBoard, cancellationToken);
+            }
+            else
+            {
+                await _gameRepo.UpdateBoardAsync(game.PlayerTwo.EnemyBoard, cancellationToken);
+                await _gameRepo.UpdateBoardAsync(game.PlayerOne.SelfBoard, cancellationToken);
+            }
+
+            return Ok(new ShotReturnDto
+            {
+                Hit = shot.ShipWasHit,
+                Position = shot.Position
+            });
         }
     }
 }

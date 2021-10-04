@@ -12,12 +12,16 @@ namespace Core.Entities
         {
             PlayerOne = new Player
             {
-                Name = playerOneName
+                Name = playerOneName,
+                SelfBoard = new Board(),
+                EnemyBoard = new Board()
             };
 
             PlayerTwo = new Player
             {
-                Name = playerTwoName
+                Name = playerTwoName,
+                SelfBoard = new Board(),
+                EnemyBoard = new Board()
             };
 
             NextTurnPlayer = PlayerOne;

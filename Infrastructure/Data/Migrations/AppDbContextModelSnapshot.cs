@@ -50,6 +50,8 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("NextTurnPlayerId");
+
                     b.HasIndex("PlayerOneId");
 
                     b.HasIndex("PlayerTwoId");
@@ -121,18 +123,26 @@ namespace Infrastructure.Data.Migrations
                     b.Property<bool>("ShipWasHit")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ShotByPlayerName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("ShotByPlayerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BoardId");
+
+                    b.HasIndex("ShotByPlayerId");
 
                     b.ToTable("Shots");
                 });
 
             modelBuilder.Entity("Core.Entities.Game", b =>
                 {
+                    b.HasOne("Core.Entities.Player", "NextTurnPlayer")
+                        .WithMany()
+                        .HasForeignKey("NextTurnPlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Player", "PlayerOne")
                         .WithMany()
                         .HasForeignKey("PlayerOneId");
@@ -140,6 +150,8 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("Core.Entities.Player", "PlayerTwo")
                         .WithMany()
                         .HasForeignKey("PlayerTwoId");
+
+                    b.Navigation("NextTurnPlayer");
 
                     b.Navigation("PlayerOne");
 
@@ -173,6 +185,14 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("Core.Entities.Board", null)
                         .WithMany("Shots")
                         .HasForeignKey("BoardId");
+
+                    b.HasOne("Core.Entities.Player", "ShotByPlayer")
+                        .WithMany()
+                        .HasForeignKey("ShotByPlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ShotByPlayer");
                 });
 
             modelBuilder.Entity("Core.Entities.Board", b =>
